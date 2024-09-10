@@ -44,7 +44,7 @@ void ATCommands::begin(Stream *stream, const at_command_t *commands, uint32_t si
 bool ATCommands::parseCommand()
 {
     uint16_t pos = 2;
-    uint8_t type;
+    uint8_t type = 255;
 
     // validate input so that we act only when we have to
     if (this->bufferPos == 0)
@@ -300,6 +300,7 @@ AT_COMMANDS_ERRORS ATCommands::update()
             clearBuffer();
         }
     }
+    return AT_COMMANDS_SUCCESS;
 }
 
 /**
@@ -334,6 +335,7 @@ void ATCommands::setDefaultHandler(bool (*function)(ATCommands *))
 void ATCommands::processCommand()
 {
     if (defaultHandler != NULL)
+    {
         if ((*defaultHandler)(this))
         {
             this->ok();
@@ -342,6 +344,7 @@ void ATCommands::processCommand()
         {
             this->error();
         }
+    }
 }
 
 /**

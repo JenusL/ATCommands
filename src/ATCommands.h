@@ -58,7 +58,7 @@ typedef struct
 */
 typedef struct
 {
-    char *at_cmdName;                  // command name
+    const char *at_cmdName;                  // command name
     bool (*at_runCmd)(ATCommands *);   // RUN command function pointer
     bool (*at_testCmd)(ATCommands *);  // TEST command function pointer
     bool (*at_readCmd)(ATCommands *);  // READ command function pointer
@@ -88,7 +88,6 @@ private:
 
     // input validation
     static int isValidCmdChar(const char c);
-    static uint8_t hexToChar(const char ch);
 
     // registers command array
     bool registerCommands(const at_command_t *commands, uint32_t size);
